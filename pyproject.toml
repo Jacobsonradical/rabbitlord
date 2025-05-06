@@ -1,15 +1,16 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "rabbitlord"
 version = "0.1.0"
-description = "Helper functions by rabbitlord"
+description = "A package for managing rabbit dates"
 authors = [{ name = "rabbitlord", email = "your@email.com" }]
-readme = ""
-requires-python = ">=3.11"
-license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.8"
+dependencies = []
 
-[build-system]
-requires = ["setuptools", "wheel"]
-build-backend = "setuptools.build_meta"
-
-[project.packages]
+[tool.setuptools.packages.find]
+where = ["."]
 include = ["rabbits"]
