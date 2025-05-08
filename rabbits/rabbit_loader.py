@@ -5,7 +5,7 @@ import zipfile
 
 def load_dataframe(fp):
     _, ext = os.path.splitext(fp)
-    if ext not in {".zip", ".csv", ".tsv", ".json"}:
+    if ext not in {".zip", ".csv", ".tsv", ".json", ".parquet"}:
         raise ValueError(f"Unsupported file type: {ext}.")
     elif ext == ".zip":
         with zipfile.ZipFile(fp, 'r') as z:
@@ -22,12 +22,16 @@ def load_dataframe(fp):
                     df = pl.read_csv(f)
                 elif inner_ext == ".tsv":
                     df = pl.read_csv(f, separator="\t")
-                else:
+                elif inner_ext == ".json":
                     df = pl.read_json(f)
+                else:
+                    df = pl.read_parquet(f)
     elif ext == ".csv":
         df = pl.read_csv(fp)
     elif ext == ".tsv":
         df = pl.read_csv(fp, separator="\t")
+    elif ext == ".parquet":
+        df = pl.read_parquet(fp)
     else:
         df = pl.read_json(fp)
     return df
