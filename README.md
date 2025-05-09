@@ -1,3 +1,3 @@
-# rabbitlord
+# RabbitLord
 
-# Rabbitlord's personal holes containing many useful rabbits. 
+RabbitLord's personal rabbit hole, containing many useful rabbits. 
