@@ -45,7 +45,7 @@ def cutoff_fps_date(list_fps, cutoff_start: str or None, cutoff_end: str or None
     """
     :param position: 0 for basename, 1 for folder name, 2 for one more level higher folder name, and so on...
     :param list_fps: list of file paths
-    :param cutoff_start: date string YYYY-MM-DD (will be excluded)
+    :param cutoff_start: date string YYYY-MM-DD (will be included as the first date)
     :param cutoff_end: date string YYYY-MM-DD (will be included as the final date)
     :return: list of file paths
     """
@@ -56,7 +56,7 @@ def cutoff_fps_date(list_fps, cutoff_start: str or None, cutoff_end: str or None
     for fp in list_fps:
         date = extract_date(fp, position)
         date_dt = datetime.strptime(date, "%Y-%m-%d")
-        if (cutoff_start is None or date_dt > datetime.strptime(cutoff_start, "%Y-%m-%d")) and \
+        if (cutoff_start is None or date_dt >= datetime.strptime(cutoff_start, "%Y-%m-%d")) and \
                 (cutoff_end is None or date_dt <= datetime.strptime(cutoff_end, "%Y-%m-%d")):
             fps_cutoff.append(fp)
     return fps_cutoff
