@@ -1,6 +1,7 @@
 from atomicwrites import atomic_write
 import json
 import os
+import orjson
 
 
 def save_extend(output_fp, list_extend):
@@ -24,4 +25,8 @@ def save_append(output_fp, to_append):
     with atomic_write(output_fp, overwrite=True) as f:
         json.dump(list_exist, f)
 
+
+def fast_save_json(output_fp, data):
+    with open(output_fp, "wb") as f:
+        f.write(orjson.dumps(data))
 
