@@ -1,6 +1,7 @@
 import polars as pl
 import os
 import zipfile
+import orjson
 
 
 def load_dataframe(fp):
@@ -37,5 +38,8 @@ def load_dataframe(fp):
     return df
 
 
-
+def fast_load_json(fp):
+    with open(fp, "rb") as f:
+        json_data = orjson.loads(f.read())
+    return json_data
 
