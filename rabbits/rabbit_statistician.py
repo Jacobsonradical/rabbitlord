@@ -32,4 +32,15 @@ def classification_index(dataframe, real_col, pred_col):
         raise Warning("The summation of Precision and Recall is zero. F1 score will be returned as 0.")
     f1 = 2 * (precision * recall) / (precision + recall) if (precision + recall) > 0 else 0
 
-    return tp, fp, tn, fn, accuracy, precision, recall, f1
+    out = {
+        "TP": tp,
+        "FP": fp,
+        "TN": tn,
+        "FN": fn,
+        "accuracy": accuracy,
+        "precision": precision,
+        "recall": recall,
+        "f1": f1,
+    }
+
+    return out
