@@ -36,8 +36,6 @@ def time_wait(seconds: int):
     Returns:
         None
     """
-    print("\n")
     for i in range(1, seconds + 1):
         print(f"\rRabbit is waiting {i}/{seconds}s.", end="")
         time.sleep(1)
-    print("\n")
