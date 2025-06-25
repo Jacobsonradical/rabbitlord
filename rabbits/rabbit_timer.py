@@ -1,4 +1,5 @@
 from datetime import datetime
+import time
 
 
 def convert_msutc_datetime(msutc: int):
@@ -23,3 +24,20 @@ def convert_msutc_datetime(msutc: int):
 
     time_str = dt.strftime('%Y-%m-%d %H:%M:%S')
     return date, date_str, hour, time_str
+
+
+def time_wait(seconds: int):
+    """
+    Wait for a specified number of seconds while printing progress to the console.
+
+    Args:
+        seconds (int): The number of seconds to wait.
+
+    Returns:
+        None
+    """
+    print("\n")
+    for i in range(1, seconds + 1):
+        print(f"\rRabbit is waiting {i}/{seconds}s.", end="")
+        time.sleep(1)
+    print("\n")
