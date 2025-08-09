@@ -15,7 +15,7 @@ class GptApiPrice:
     }
 
     @classmethod
-    def compute_price(cls, model_name: str, if_batch: bool, input_token: int, output_token: int | None) -> dict:
+    def compute_price(cls, openai_model: str, if_batch: bool, input_token: int, output_token: int | None) -> dict:
         if output_token is None:
             print("No output token number is given. "
                   "We default the output token number to the same as the input token number.")
@@ -23,10 +23,10 @@ class GptApiPrice:
         else:
             output_token_est = output_token
 
-        if model_name not in cls.PRICES:
-            raise ValueError(f"Unrecognized model name: {model_name}")
+        if openai_model not in cls.PRICES:
+            raise ValueError(f"Unrecognized model name: {openai_model}")
 
-        input_price, output_price = cls.PRICES[model_name]
+        input_price, output_price = cls.PRICES[openai_model]
 
         if if_batch is True:
             print("Computation will be based on batch API price")
@@ -37,7 +37,7 @@ class GptApiPrice:
         output_cost = (output_token_est / 1000000) * output_price
         total_cost = input_cost + output_cost
         return {
-            "model_name": model_name,
+            "model_name": openai_model,
             "input_token": input_token,
             "output_token": output_token,
             "input_cost": input_cost,
