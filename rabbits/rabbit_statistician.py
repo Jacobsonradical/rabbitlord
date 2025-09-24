@@ -66,7 +66,7 @@ def classification_index(
     recall = safe_div(tp, tp + fn)
     specificity = safe_div(tn, tn + fp)  # Out of all the actual negatives, how many did the classifier correctly predict as negative?
     fpr = safe_div(fp, fp + tn)  # Out of all the actual negatives, how many did the classifier incorrectly predict as positive?
-    fnr = safe_div(fn, fn + tp)  # Out of all the actual positives, how many did the classifier miss?
+    fnr = safe_div(fn, fn + tp)  # Out of all the actual positives, how many did the classifier incorrectly predict as negative?
     npv = safe_div(tn, tn + fn)  # Out of all the predicted negatives, how many are actually negative
     prevalence = safe_div(tp + fn, n)  # The proportion of the dataset that is actually positive.
 
