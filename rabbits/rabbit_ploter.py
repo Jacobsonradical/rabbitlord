@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from typing import Dict, List, Tuple, Union, Optional
+import matplotlib.cm as cm
 
 
 def prepare_stats(
@@ -101,8 +102,10 @@ def plot_means_with_ci(
     x = np.arange(len(labels))
     fig, ax = plt.subplots(figsize=figsize)
 
-    # Bars + error bars (no explicit colors to respect your plotting prefs)
-    rects = ax.bar(x, means, yerr=ci_half, capsize=capsize)
+    # Bars + error bars
+    cmap = plt.get_cmap("tab10")
+    colors = [cmap(i % cmap.N) for i in range(len(labels))]
+    rects = ax.bar(x, means, yerr=ci_half, capsize=capsize, color=colors)
 
     # Labels & axes
     main_title = title if subtitle is None else f"{title}\n{subtitle}"
