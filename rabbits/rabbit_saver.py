@@ -3,7 +3,7 @@ import json
 import os
 import orjson
 import polars as pl
-from rabbit_loader import load_dataframe
+from .rabbit_loader import load_dataframe
 
 
 def save_extend(output_fp, list_extend, show_emoji=False):
