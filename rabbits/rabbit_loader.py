@@ -20,9 +20,15 @@ def load_dataframe(fp, ignore_errors=False, quote_char='"'):
 
             with z.open(inner_file) as f:
                 if inner_ext == ".csv":
-                    df = pl.read_csv(f)
+                    if quote_char is None:
+                        df = pl.read_csv(f, ignore_errors=ignore_errors, quote_char=None)
+                    else:
+                        df = pl.read_csv(f, ignore_errors=ignore_errors)
                 elif inner_ext == ".tsv":
-                    df = pl.read_csv(f, separator="\t")
+                    if quote_char is None:
+                        df = pl.read_csv(f, separator="\t", ignore_errors=ignore_errors, quote_char=None)
+                    else:
+                        df = pl.read_csv(f, separator="\t", ignore_errors=ignore_errors)
                 elif inner_ext == ".json":
                     df = pl.read_json(f)
                 else:
