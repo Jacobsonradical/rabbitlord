@@ -4,7 +4,7 @@ import zipfile
 import orjson
 
 
-def load_dataframe(fp):
+def load_dataframe(fp, ignore_errors=False, quote_char='"'):
     _, ext = os.path.splitext(fp)
     if ext not in {".zip", ".csv", ".tsv", ".json", ".parquet"}:
         raise ValueError(f"Unsupported file type: {ext}.")
@@ -28,9 +28,15 @@ def load_dataframe(fp):
                 else:
                     df = pl.read_parquet(f)
     elif ext == ".csv":
-        df = pl.read_csv(fp)
+        if quote_char is None:
+            df = pl.read_csv(fp, ignore_errors=ignore_errors, quote_char=None)
+        else:
+            df = pl.read_csv(fp, ignore_errors=ignore_errors)
     elif ext == ".tsv":
-        df = pl.read_csv(fp, separator="\t")
+        if quote_char is None:
+            df = pl.read_csv(fp, separator="\t", ignore_errors=ignore_errors, quote_char=None)
+        else:
+            df = pl.read_csv(fp, separator="\t", ignore_errors=ignore_errors)
     elif ext == ".parquet":
         df = pl.read_parquet(fp)
     else:
